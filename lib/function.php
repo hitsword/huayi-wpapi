@@ -70,67 +70,6 @@ if(!function_exists('huayi_authcode')) {
   }
 } 
 
-/* CURL GET */
-if(!function_exists('huayi_vget')) {//TODO废弃
-    /**
-      * @param string $url GET的URL
-      *
-      * @example
-      *
-      *  $url = "http://www.baidu.com";
-      *  $a = huayi_vget($url);
-      *
-    **/
-  function huayi_vget($url) { // 模拟提交数据函数
-        $curl = curl_init (); // 启动一个CURL会话
-        curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
-        curl_setopt ( $curl, CURLOPT_FOLLOWLOCATION, 1 ); // 使用自动跳转
-        curl_setopt ( $curl, CURLOPT_ENCODING, "gzip, deflate" );//gzip压缩
-        curl_setopt ( $curl, CURLOPT_TIMEOUT, 20 ); // 设置超时限制防止死循环，用来CC设置2-3为佳
-        curl_setopt ( $curl, CURLOPT_HEADER, 0 ); // 显示返回的Header区域内容
-        curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 ); // 获取的信息以文件流的形式返回
-        $tmpInfo = curl_exec ( $curl ); // 执行操作
-        if (curl_errno ( $curl )) {
-                echo 'Errno' . curl_error ( $curl );
-        }
-        curl_close ( $curl ); // 关键CURL会话
-        return $tmpInfo; // 返回数据
-  }
-} 
-
-/* CURL POST */
-if(!function_exists('huayi_vpost')) {//TODO废弃
- /**
-  * @param string $url GET的URL
-  * @param array/string $postdata 发送的数据
-  * @return string
-  *
-  * @example
-  *
-  *  $url = "http://www.baidu.com";
-  *  $postdata = array('a'=>'1','b'=>'2');
-  *  $a = huayi_vget($url,$postdata);
-  *
- **/
-  function huayi_vpost($url, $postdata) { // 模拟提交数据函数
-    $curl = curl_init (); // 启动一个CURL会话
-    curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
-    curl_setopt ( $curl, CURLOPT_FOLLOWLOCATION, 1 ); // 使用自动跳转
-    curl_setopt ( $curl, CURLOPT_POST, 1 ); // 发送一个常规的Post请求
-    is_array($postdata) && $postdata = http_build_query($postdata);//自动把数组转换为HTTP请求
-    curl_setopt ( $curl, CURLOPT_POSTFIELDS, $postdata ); // Post提交的数据包
-    curl_setopt ( $curl, CURLOPT_TIMEOUT, 20 ); // 设置超时限制防止死循环
-    curl_setopt ( $curl, CURLOPT_HEADER, 0 ); // 显示返回的Header区域内容
-    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 ); // 获取的信息以文件流的形式返回
-    $tmpInfo = curl_exec ( $curl ); // 执行操作
-    if (curl_errno ( $curl )) {
-      print curl_error ( $curl );
-    }
-    curl_close ( $curl ); // 关键CURL会话
-    return $tmpInfo; // 返回数据
-  }
-} 
-
 /* 获取当前页面完整地址，自动判断HTTPS和端口 */
 if(!function_exists('huayi_page_url')) {
   function huayi_page_url(){ 
