@@ -47,3 +47,4 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
  /huayi-wpapi.php 插件入口文件(一般无需修改)
  /uninstall.php 卸载插件时调用(一般无需修改)
  /readme.txt 当前文件(一般无需修改)
+ /SDK/ SDK与DEMO
