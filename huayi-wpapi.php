@@ -22,16 +22,16 @@ require_once('lib/function.php');//调用公共函数文件
 require_once('lib/aciton.php');//调用接口操作文件
 
 /* 增加Api路由 */
-function huayi_api_init() {
+function huayi_wpapi_init() {
   add_rewrite_rule( '^huayi-wpapi','index.php?huayi_route=/','top' );
   
   global $wp;
   $wp->add_query_var( 'huayi_route' );
 }
-add_action( 'init', 'huayi_api_init' );
+add_action( 'init', 'huayi_wpapi_init' );
 
 /* 返回Api请求结果 */
-function huayi_api_rest(){
+function huayi_wpapi_rest(){
   if (empty($GLOBALS['wp']->query_vars['huayi_route'])) {
     return;
   } else {
@@ -53,7 +53,7 @@ function huayi_api_rest(){
   exit;
 }
 if( !is_admin() ) {
-  add_action( 'parse_request', 'huayi_api_rest' );
+  add_action( 'parse_request', 'huayi_wpapi_rest' );
 }
 
 /*================主动接口====================*/
