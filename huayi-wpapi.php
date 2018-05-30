@@ -40,7 +40,7 @@ function huayi_wpapi_rest(){
     }elseif (!huayi_wpapi_signature_check()) {//检查签名
       $res = array('errcode'=>'403','errmsg'=>'签名无效!');
     } else {
-      if (!huayi_check_action()) {//检查请求
+      if (!huayi_wpapi_check_action()) {//检查请求
         $res = array('errcode'=>'404','errmsg'=>'无效请求!');
       } else {//执行请求
         $res = array('errcode'=>'1','errmsg'=>'请求成功!');

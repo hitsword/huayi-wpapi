@@ -1,7 +1,7 @@
 <?php
 /*=================插件自带操作====================*/
 /* 获取所有分类法 */
-function huayi_get_taxonomies(){
+function huayi_wpapi_get_taxonomies(){
   $taxonomies = get_taxonomies();
   unset($taxonomies['nav_menu'],$taxonomies['link_category'],$taxonomies['post_format']);
   return $taxonomies;
@@ -14,7 +14,7 @@ function huayi_get_taxonomies(){
  *     category 文章分类(默认)
  *     post_tag 文章标签
  */
-function huayi_categories_list($taxonomy=''){
+function huayi_wpapi_categories_list($taxonomy=''){
   if (empty($taxonomy) && !empty($_POST['taxonomy'])) {//自动获取 $taxonomy 参数
     $taxonomy = $_POST['taxonomy'];
   }
@@ -29,7 +29,7 @@ function huayi_categories_list($taxonomy=''){
 }
 
 /* 获取所有POST类型 */
-function huayi_get_post_types(){
+function huayi_wpapi_get_post_types(){
   return get_post_types(array('public'=>true));
 }
 
@@ -40,7 +40,7 @@ function huayi_get_post_types(){
  * @param int posts_per_page 每页数据
  * @param string keyword 搜索关键词
  */
-function huayi_post_search($post_type='',$paged=1,$posts_per_page=50,$keyword=''){
+function huayi_wpapi_post_search($post_type='',$paged=1,$posts_per_page=50,$keyword=''){
   !empty($_POST['post_type']) && $post_type = $_POST['post_type'];
   !empty($_POST['paged']) && $paged = $_POST['paged'];
   !empty($_POST['posts_per_page']) && $posts_per_page = $_POST['posts_per_page'];
@@ -100,7 +100,7 @@ function huayi_post_search($post_type='',$paged=1,$posts_per_page=50,$keyword=''
  * @param int cat_id 分类ID/空
  * @param string taxonomy 自定义分类法/false
  */
-function huayi_post_list($post_type='',$paged=1,$posts_per_page=50,$cat_id='',$taxonomy=false){
+function huayi_wpapi_post_list($post_type='',$paged=1,$posts_per_page=50,$cat_id='',$taxonomy=false){
   !empty($_POST['post_type']) && $post_type = $_POST['post_type'];
   !empty($_POST['paged']) && $paged = $_POST['paged'];
   !empty($_POST['posts_per_page']) && $posts_per_page = $_POST['posts_per_page'];
@@ -165,7 +165,7 @@ function huayi_post_list($post_type='',$paged=1,$posts_per_page=50,$cat_id='',$t
  * 根据post_id获取POST内容
  * @param int post_id
  */
-function huayi_post_by_id($post_id=''){
+function huayi_wpapi_post_by_id($post_id=''){
   !empty($_POST['post_id']) && $post_id = $_POST['post_id'];
   
   $post = get_post( $post_id );
@@ -200,15 +200,15 @@ function huayi_post_by_id($post_id=''){
 /*=================下方增加或修改====================*/
 
 /* 检查请求有效性 */
-function huayi_check_action($action=''){//在增加Action时需要在下方Action列表增加
+function huayi_wpapi_check_action($action=''){//在增加Action时需要在下方Action列表增加
   $action = empty($action) ? $_POST['action'] : $action;
   $action_list = array(
-    'huayi_get_taxonomies',
-    'huayi_categories_list',
-    'huayi_get_post_types',
-    'huayi_post_search',
-    'huayi_post_list',
-    'huayi_post_by_id',
+    'huayi_wpapi_get_taxonomies',
+    'huayi_wpapi_categories_list',
+    'huayi_wpapi_get_post_types',
+    'huayi_wpapi_post_search',
+    'huayi_wpapi_post_list',
+    'huayi_wpapi_post_by_id',
   );
   if (function_exists($action) && in_array($action,$action_list)) {
     return true;
@@ -217,7 +217,7 @@ function huayi_check_action($action=''){//在增加Action时需要在下方Actio
 }
 
 /* 
- * 改变插件自带的'huayi_post_search'&'huayi_post_list'&'huayi_post_by_id'的返回结果
+ * 改变插件自带的'huayi_wpapi_post_search'&'huayi_wpapi_post_list'&'huayi_wpapi_post_by_id'的返回结果
  */
 function huayi_wpapi_posts_filters($data){//改变最终返回结果
   if ($data['post_type']=='product') {

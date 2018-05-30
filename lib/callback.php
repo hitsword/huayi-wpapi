@@ -12,7 +12,7 @@ function huay_save_post_callback( $post_id ) {
     global $Acquisition;
 
     $conf['post'] = huayi_wpapi_signature_make();
-    $conf['post']['data'] = huayi_post_by_id($post_id);
+    $conf['post']['data'] = huayi_wpapi_post_by_id($post_id);
     //$conf['post']['data'] = get_post($post_id);
 
     $Acquisition->HuayiCurl($callback, $conf);

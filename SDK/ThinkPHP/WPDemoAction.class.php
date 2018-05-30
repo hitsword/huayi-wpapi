@@ -19,7 +19,7 @@ class WPDemoAction extends Action {
   */
   public function SiteGetNews(){//OK
     $data = array(
-      'action'=>'huayi_post_list',
+      'action'=>'huayi_wpapi_post_list',
       'post_type'=>'post',
       'paged'=>1,
       'posts_per_page'=>6,
