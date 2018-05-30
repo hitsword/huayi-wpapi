@@ -3,7 +3,7 @@
 Plugin Name: HuaYi WordPress API
 Plugin URI: http://www.huayizhiyun.com
 Description: WordPress被动接口与主动接口.
-Version: 2.0
+Version: 2.1
 Author: 华怡智云
 Author URI: http://www.huayizhiyun.com
 License: GPL
