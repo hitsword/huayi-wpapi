@@ -100,13 +100,17 @@ if(!function_exists('huayi_get_ip')) {
 }
 
 /* 开启SESSION */
-function huayi_session_start() {
+if(!function_exists('huayi_session_start')) {
+  function huayi_session_start() {
     if(!session_id())session_start();
+  }
 }
 
 /* 关闭SESSION */
-function huayi_session_destroy() {
+if(!function_exists('huayi_session_destroy')) {
+  function huayi_session_destroy() {
     session_destroy ();
+  }
 }
 
 /* 获取SESSION值 */
