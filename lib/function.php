@@ -189,8 +189,8 @@ if (!function_exists('huayi_signature_check')) {
   }
 }
 /* IP地址验证 */
-if (!function_exists('huayi_ip_check')) {
-  function huayi_ip_check($ip=''){
+if (!function_exists('huayi_wpapi_ip_check')) {
+  function huayi_wpapi_ip_check($ip=''){
     $ip = empty($ip) ? huayi_get_ip() : $ip;//获取访客IP
     $ips = trim(get_option('huayi_wpapi_ips'));//获取IP白名单
     $ips_arr = explode(",",$ips);//转换IP白名单为数组
