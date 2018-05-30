@@ -37,7 +37,7 @@ function huayi_api_rest(){
   } else {
     if (!huayi_wpapi_ip_check()) {//检查IP
       $res = array('errcode'=>'403','errmsg'=>'无权访问!');
-    }elseif (!huayi_signature_check()) {//检查签名
+    }elseif (!huayi_wpapi_signature_check()) {//检查签名
       $res = array('errcode'=>'403','errmsg'=>'签名无效!');
     } else {
       if (!huayi_check_action()) {//检查请求

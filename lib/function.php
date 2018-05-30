@@ -175,8 +175,8 @@ if (!function_exists('huayi_signature_make')) {
   }
 }
 /* 签名验证 */
-if (!function_exists('huayi_signature_check')) {
-  function huayi_signature_check($signature='',$time=''){
+if (!function_exists('huayi_wpapi_signature_check')) {
+  function huayi_wpapi_signature_check($signature='',$time=''){
     $signature = empty($signature) ? $_POST['signature'] : $signature;
     $time = empty($time) ? $_POST['time'] : $time;
     $token = get_option('huayi_wpapi_token');
