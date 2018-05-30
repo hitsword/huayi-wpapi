@@ -7,7 +7,7 @@
     add_option('huayi_wpapi_callback', '', '', 'yes');//回调URL(主动接口)
     add_option('huayi_wpapi_token', 'token', '', 'yes');//接口Token 验证算法：$signature = md5($token.$time)
     add_option('huayi_wpapi_ips', '', '', 'yes');//被动接口IP白名单
-    add_option('huayi_thumbnail_size', '', '', 'yes');//默认缩略图尺寸
+    add_option('huayi_wpapi_thumbnail_size', '', '', 'yes');//默认缩略图尺寸
   }
 
 /* 注册停用插件时要调用的函数 */ 
@@ -18,7 +18,7 @@
     delete_option('huayi_wpapi_callback');
     delete_option('huayi_wpapi_token');
     delete_option('huayi_wpapi_ips');
-    delete_option('huayi_thumbnail_size');
+    delete_option('huayi_wpapi_thumbnail_size');
   }
 
   if( is_admin() ) {
@@ -39,7 +39,7 @@
         <form method="post" action="options.php" novalidate="novalidate">
           <!-- 下面这行代码用来保存表单中内容到数据库 -->  
           <?php wp_nonce_field('update-options'); ?>  
-          <input type="hidden" name="page_options" value="huayi_wpapi_center,huayi_wpapi_callback,huayi_wpapi_token,huayi_wpapi_ips,huayi_thumbnail_size" />
+          <input type="hidden" name="page_options" value="huayi_wpapi_center,huayi_wpapi_callback,huayi_wpapi_token,huayi_wpapi_ips,huayi_wpapi_thumbnail_size" />
           <input type="hidden" name="action" value="update" />
           <p>WordPress Api设置</p>
           <table class="form-table">
@@ -66,8 +66,8 @@
               </td>
             </tr>
             <tr>
-              <th scope="row"><label for="huayi_thumbnail_size" ><?php _e('图片尺寸') ?></label></th>
-              <td><input name="huayi_thumbnail_size" type="text" id="huayi_thumbnail_size" value="<?php form_option('huayi_thumbnail_size'); ?>" class="regular-text" />
+              <th scope="row"><label for="huayi_wpapi_thumbnail_size" ><?php _e('图片尺寸') ?></label></th>
+              <td><input name="huayi_wpapi_thumbnail_size" type="text" id="huayi_wpapi_thumbnail_size" value="<?php form_option('huayi_wpapi_thumbnail_size'); ?>" class="regular-text" />
               <p class="description" id="thumbnail_size-description"><?php _e( '默认图片尺寸,系统自带尺寸：thumbnail/medium/large/full.如在主题或其他插件中定义了其他尺寸,可以输入定义的尺寸名。' ) ?></p></td>
             </tr>
           </table>

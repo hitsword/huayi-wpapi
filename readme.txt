@@ -16,7 +16,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *  get_option('huayi_wpapi_callback')
  *  get_option('huayi_wpapi_token')
  *  get_option('huayi_wpapi_ips')
- *  get_option('huayi_thumbnail_size')
+ *  get_option('huayi_wpapi_thumbnail_size')
  *
  * 被动接口：
  *   关闭伪静态：index.php?huayi_route=huayi-wpapi

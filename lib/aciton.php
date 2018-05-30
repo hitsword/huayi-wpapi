@@ -76,8 +76,8 @@ function huayi_post_search($post_type='',$paged=1,$posts_per_page=50,$keyword=''
       $data['title'] = get_the_title();
       $data['excerpt'] = wp_trim_words( do_shortcode(get_the_content('',true)), 300);
       $data['url'] = esc_url( get_permalink($data['ID']) );
-      if (get_option('huayi_thumbnail_size')) {
-        $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_thumbnail_size'));
+      if (get_option('huayi_wpapi_thumbnail_size')) {
+        $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
       } else {
         $data['thumbnail'] = huayi_get_post_thumbnail_url(null);
       }
@@ -145,8 +145,8 @@ function huayi_post_list($post_type='',$paged=1,$posts_per_page=50,$cat_id='',$t
       $data['title'] = get_the_title();
       $data['excerpt'] = wp_trim_words( do_shortcode(get_the_content('',true)), 300);
       $data['url'] = esc_url( get_permalink($data['ID']) );
-      if (get_option('huayi_thumbnail_size')) {
-        $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_thumbnail_size'));
+      if (get_option('huayi_wpapi_thumbnail_size')) {
+        $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
       } else {
         $data['thumbnail'] = huayi_get_post_thumbnail_url(null);
       }
@@ -184,8 +184,8 @@ function huayi_post_by_id($post_id=''){
     $data['title'] = $post->post_title;
     $data['excerpt'] = wp_trim_words( do_shortcode($post->post_content), 300);
     $data['url'] = esc_url( get_permalink($data['ID']) );
-    if (get_option('huayi_thumbnail_size')) {
-      $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_thumbnail_size'));
+    if (get_option('huayi_wpapi_thumbnail_size')) {
+      $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
     } else {
       $data['thumbnail'] = huayi_get_post_thumbnail_url(null);
     }

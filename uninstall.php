@@ -8,4 +8,4 @@ delete_option('huayi_wpapi_center');
 delete_option('huayi_wpapi_callback');
 delete_option('huayi_wpapi_token'); 
 delete_option('huayi_wpapi_ips'); 
-delete_option('huayi_thumbnail_size');
+delete_option('huayi_wpapi_thumbnail_size');
