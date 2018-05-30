@@ -77,9 +77,9 @@ function huayi_post_search($post_type='',$paged=1,$posts_per_page=50,$keyword=''
       $data['excerpt'] = wp_trim_words( do_shortcode(get_the_content('',true)), 300);
       $data['url'] = esc_url( get_permalink($data['ID']) );
       if (get_option('huayi_wpapi_thumbnail_size')) {
-        $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
+        $data['thumbnail'] = huayi_wpapi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
       } else {
-        $data['thumbnail'] = huayi_get_post_thumbnail_url(null);
+        $data['thumbnail'] = huayi_wpapi_get_post_thumbnail_url(null);
       }
 
       $res[] = apply_filters( 'huayi_wpapi_posts_filters',$data );//改变最终返回结果
@@ -146,9 +146,9 @@ function huayi_post_list($post_type='',$paged=1,$posts_per_page=50,$cat_id='',$t
       $data['excerpt'] = wp_trim_words( do_shortcode(get_the_content('',true)), 300);
       $data['url'] = esc_url( get_permalink($data['ID']) );
       if (get_option('huayi_wpapi_thumbnail_size')) {
-        $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
+        $data['thumbnail'] = huayi_wpapi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
       } else {
-        $data['thumbnail'] = huayi_get_post_thumbnail_url(null);
+        $data['thumbnail'] = huayi_wpapi_get_post_thumbnail_url(null);
       }
 
       $res[] = apply_filters( 'huayi_wpapi_posts_filters',$data );//改变最终返回结果
@@ -185,9 +185,9 @@ function huayi_post_by_id($post_id=''){
     $data['excerpt'] = wp_trim_words( do_shortcode($post->post_content), 300);
     $data['url'] = esc_url( get_permalink($data['ID']) );
     if (get_option('huayi_wpapi_thumbnail_size')) {
-      $data['thumbnail'] = huayi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
+      $data['thumbnail'] = huayi_wpapi_get_post_thumbnail_url(null,get_option('huayi_wpapi_thumbnail_size'));
     } else {
-      $data['thumbnail'] = huayi_get_post_thumbnail_url(null);
+      $data['thumbnail'] = huayi_wpapi_get_post_thumbnail_url(null);
     }
     $res = apply_filters( 'huayi_wpapi_posts_filters',$data );//改变最终返回结果
   } else {

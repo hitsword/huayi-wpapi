@@ -151,11 +151,11 @@ if(!function_exists('huayi_session_set')) {
 }
 
 /* 获取文章缩略图 */
-if(!function_exists('huayi_get_post_thumbnail_url')) {
+if(!function_exists('huayi_wpapi_get_post_thumbnail_url')) {
  /**
   * $size: thumbnail:缩略图 medium：中图 large：大图 full：原图
  **/
-  function huayi_get_post_thumbnail_url($post_id,$size='medium'){
+  function huayi_wpapi_get_post_thumbnail_url($post_id,$size='medium'){
     $post_id = ( null === $post_id ) ? get_the_ID() : $post_id;
     if ( has_post_thumbnail($post_id) ) {
       $thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($post_id), $size);
