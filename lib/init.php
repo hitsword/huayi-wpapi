@@ -73,7 +73,7 @@
           </table>
           <?php submit_button(); ?>
         </form>
-        <?php $huayi_debug = huayi_signature_make();?>
+        <?php $huayi_debug = huayi_wpapi_signature_make();?>
         <table class="form-table">
           <tr>
             <th scope="row">被动API地址:</th>

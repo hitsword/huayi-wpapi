@@ -11,7 +11,7 @@ function huay_save_post_callback( $post_id ) {
   if (!empty($callback)){
     global $Acquisition;
 
-    $conf['post'] = huayi_signature_make();
+    $conf['post'] = huayi_wpapi_signature_make();
     $conf['post']['data'] = huayi_post_by_id($post_id);
     //$conf['post']['data'] = get_post($post_id);
 

@@ -166,8 +166,8 @@ if(!function_exists('huayi_get_post_thumbnail_url')) {
   }
 }
 /* 签名生成 */
-if (!function_exists('huayi_signature_make')) {
-  function huayi_signature_make(){
+if (!function_exists('huayi_wpapi_signature_make')) {
+  function huayi_wpapi_signature_make(){
     $token = get_option('huayi_wpapi_token');
     $time = time();
     $signature = md5($token.$time);
