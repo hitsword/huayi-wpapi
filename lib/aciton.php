@@ -215,22 +215,3 @@ function huayi_wpapi_check_action($action=''){//在增加Action时需要在下�
   }
   return false;
 }
-
-/* 
- * 改变插件自带的'huayi_wpapi_post_search'&'huayi_wpapi_post_list'&'huayi_wpapi_post_by_id'的返回结果
- */
-function huayi_wpapi_posts_filters($data){//改变最终返回结果
-  if ($data['post_type']=='product') {
-    $cat = wp_get_post_terms($data['ID'],'product_category',array('fields'=>'ids'));//获取指定分类法的分类
-    $data['cat_ID'] = implode(",",$cat);
-    
-    if (function_exists('get_field')) {//获取自定义参数
-      $data['spec_n_price'] = get_field('spec_n_price',$data['ID']);
-      $data['ent_id'] = get_field('ent_id',$data['ID']);
-      $data['type'] = get_field('type',$data['ID']);
-      $data['point'] = get_field('point',$data['ID']);
-    }
-  }
-  return $data;
-}
-add_filter( 'huayi_wpapi_posts_filters', 'huayi_wpapi_posts_filters' );
