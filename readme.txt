@@ -48,3 +48,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
  /uninstall.php 卸载插件时调用(一般无需修改)
  /readme.txt 当前文件(一般无需修改)
  /SDK/ SDK与DEMO
+ 
+== TODO ==
+1.aciton和callback增加hook
+2.优化API格式
+3.优化huayi_wpapi_rest方法
+4.增加API日志
