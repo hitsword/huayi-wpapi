@@ -78,7 +78,7 @@ if(!function_exists('huayi_page_url')) {
       $pageURL .= "s"; 
     } 
     $pageURL .= "://"; 
-    if ($_SERVER["SERVER_PORT"] != "80") { 
+    if ($_SERVER["SERVER_PORT"] != "80" || $_SERVER["SERVER_PORT"] != "443") { 
       $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"]; 
     } else { 
       $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]; 
@@ -185,6 +185,7 @@ if (!function_exists('huayi_wpapi_signature_check')) {
         return true;
       }
     }
+    //return true;//临时关闭验证
     return false;
   }
 }
