@@ -48,7 +48,9 @@ function huayi_wpapi_rest(){
       }
     }
     header ( "Pragma: no-cache" );
-    echo json_encode($res);exit;
+    header('Content-Type:application/json; charset=utf-8');
+    exit(json_encode($res, JSON_UNESCAPED_UNICODE));
+    //echo json_encode($res);exit;
   }
   exit;
 }
