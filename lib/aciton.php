@@ -209,9 +209,92 @@ function huayi_wpapi_check_action($action=''){//在增加Action时需要在下�
     'huayi_wpapi_post_search',
     'huayi_wpapi_post_list',
     'huayi_wpapi_post_by_id',
+    'huayi_wpapi_media',//获取媒体
+    'huayi_wpapi_media_delete',//删除媒体
+    'huayi_wpapi_media_add',//添加媒体
   );
   if (function_exists($action) && in_array($action,$action_list)) {
     return true;
   }
   return false;
+}
+
+/* 
+ * 获取媒体 action = huayi_wpapi_media
+ * @param int paged 页码
+ * @param int posts_per_page 每页数量
+ * @param string keyword 搜索关键词
+ */
+function huayi_wpapi_media($paged=1,$posts_per_page=50,$keyword=''){
+  !empty($_POST['paged']) && $paged = $_POST['paged'];
+  !empty($_POST['posts_per_page']) && $posts_per_page = $_POST['posts_per_page'];
+  !empty($_POST['keyword']) && $keyword = $_POST['keyword'];
+  
+  $args = array(
+    'post_status' => 'any',
+    's' => $keyword,
+	  'paged' => empty($paged) ? 1 : $paged,
+	  'posts_per_page' => empty($posts_per_page) ? 50 : $posts_per_page,
+  );
+  $args['post_type'] = 'attachment';
+  
+  $query = new WP_Query( $args );
+  if ( $query->have_posts() ) {
+    // 通过查询的结果，开始主循环
+    while ( $query->have_posts() ) {
+      $query->the_post();
+      $data = get_post( get_the_ID() );
+      //$data = array('ID'=>get_the_ID());
+      //$data['title'] = get_the_title();
+      //$data['url'] = esc_url( get_permalink($data['ID']) );
+
+      $res[] = apply_filters( 'huayi_wpapi_media_filters',$data );//改变最终返回结果
+    }
+  } else {
+    $res = '404';
+  }
+  // 重置请求数据
+  wp_reset_postdata();
+  return $res;
+}
+
+/* 
+ * 删除媒体 action = huayi_wpapi_media_delete
+ * @param int attachmentid 附件ID
+ */
+function huayi_wpapi_media_delete($attachmentid=0 ){
+  !empty($_POST['attachmentid']) && $attachmentid = $_POST['attachmentid'];
+  if ($attachmentid > 0) {
+    $res = wp_delete_attachment( $attachmentid );
+  }else {
+    $res = '404';
+  }
+  return $res;
+}
+
+/* 
+ * 添加媒体 action = huayi_wpapi_media_add
+ * @param string file 附件字段
+ * @param int post_id 附件
+ */
+function huayi_wpapi_media_add($file, $post_id=0){
+  !empty($_POST['file']) && $file = $_POST['file'];
+  !empty($_POST['post_id']) && $post_id = $_POST['post_id'];
+  
+	// These files need to be included as dependencies when on the front end.
+	require_once( ABSPATH . 'wp-admin/includes/image.php' );
+	require_once( ABSPATH . 'wp-admin/includes/file.php' );
+	require_once( ABSPATH . 'wp-admin/includes/media.php' );
+	
+	// Let WordPress handle the upload.
+	// Remember, $file is the name of our file input in our form above.
+	$attachment_id = media_handle_upload( $file, $post_id );
+	
+	if ( is_wp_error( $attachment_id ) ) {
+		$res['msg'] = '上传失败';
+	} else {
+		$res['msg'] = '上传成功';
+		$res['ID'] = $attachment_id;
+	}
+	return $res;
 }
