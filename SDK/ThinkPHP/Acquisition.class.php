@@ -29,6 +29,7 @@ class Acquisition {
     *        mixed noerror 不显示错误
     *        string referer   来路域名
     *        int    timeout   采集超时时间
+    *        int    json      JSON模式提交0是默认post,1是json
     * @return mixed
     */
     static public function HuayiCurl($url, $conf = array()) {
@@ -48,8 +49,16 @@ class Acquisition {
           }
         }
         if ( isset($conf['post']) ) {
+          if ( isset($conf['json']) )  {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json; charset=utf-8',
+                'Content-Length: ' . strlen($conf['post'])
+              )
+            );
+          }else {
+            is_array($conf['post']) && $conf['post'] = http_build_query($conf['post']);//自动把数组转换为HTTP请求
+          }
           curl_setopt ( $curl, CURLOPT_POST, 1 ); // 发送一个常规的Post请求
-          is_array($conf['post']) && $conf['post'] = http_build_query($conf['post']);//自动把数组转换为HTTP请求
           curl_setopt ( $curl, CURLOPT_POSTFIELDS, $conf['post'] ); // Post提交的数据包
         }else {
          	curl_setopt ( $curl, CURLOPT_ENCODING, "gzip, deflate" );//gzip压缩
