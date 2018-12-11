@@ -7,7 +7,7 @@ class WPDemoAction extends Action {
   public function SiteObj(){//OK
     import('ORG.Huayi.WordPress');
     $options = array(
- 			'api'=>'http://test.com/huayi-wpapi', //API地址
+ 			'api'=>'http://test.com/huayi-wpapi/', //API地址
  			'token'=>'token', //TOKEN
  			'ips'=>'', //白名单IP列表，半角逗号分隔
  		);
