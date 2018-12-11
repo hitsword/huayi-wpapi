@@ -74,7 +74,9 @@ class WordPress {
   public function Query($data=array()){
     $conf['post'] = self::SignatureMake();
     $conf['post'] = array_merge($data,$conf['post']);
-    
+    if (stripos($this->WPAPI,"ttps://");) {
+      $conf['ssl'] = 1;
+    }
     import('ORG.Huayi.Acquisition');
     $res = Acquisition::HuayiCurl($this->WPAPI,$conf);
     return json_decode($res,true);
