@@ -315,7 +315,8 @@ function huayi_wpapi_media_add($file, $post_id=0){
 		$res['msg'] = '上传失败';
 	} else {
 		$res['msg'] = '上传成功';
-		$res['ID'] = $attachment_id;
+    $res['ID'] = $attachment_id;
+    $res['media'] = huayi_wpapi_media_by_id($attachment_id);
 	}
 	return $res;
 }
