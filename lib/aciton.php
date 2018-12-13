@@ -212,6 +212,7 @@ function huayi_wpapi_check_action($action=''){//在增加Action时需要在下�
     'huayi_wpapi_media',//获取媒体
     'huayi_wpapi_media_delete',//删除媒体
     'huayi_wpapi_media_add',//添加媒体
+    'huayi_wpapi_media_by_id',//根据ID查媒体
   );
   if (function_exists($action) && in_array($action,$action_list)) {
     return true;
@@ -240,21 +241,41 @@ function huayi_wpapi_media($paged=1,$posts_per_page=50,$keyword=''){
   
   $query = new WP_Query( $args );
   if ( $query->have_posts() ) {
+    $res['total'] = $query->found_posts;
     // 通过查询的结果，开始主循环
     while ( $query->have_posts() ) {
       $query->the_post();
       $data = get_post( get_the_ID() );
-      //$data = array('ID'=>get_the_ID());
-      //$data['title'] = get_the_title();
-      //$data['url'] = esc_url( get_permalink($data['ID']) );
-
-      $res[] = apply_filters( 'huayi_wpapi_media_filters',$data );//改变最终返回结果
+      if (function_exists('get_fields')) {//返回所有ACF自定义字段
+        $data->acf_fields = get_fields($data->ID);
+      }
+      $res['lists'][] = apply_filters( 'huayi_wpapi_media_filters',$data );//改变最终返回结果
     }
   } else {
     $res = '404';
   }
   // 重置请求数据
   wp_reset_postdata();
+  return $res;
+}
+
+/* 
+ * 根据post_id获取媒体 action = huayi_wpapi_media_by_id
+ * @param int post_id
+ */
+function huayi_wpapi_media_by_id($post_id=''){
+  !empty($_POST['post_id']) && $post_id = $_POST['post_id'];
+  
+  $post = get_post( $post_id );
+  if ( $post->post_type = 'attachment' ) {
+    $data = $post;
+    if (function_exists('get_fields')) {//返回所有ACF自定义字段
+      $data->acf_fields = get_fields($data->ID);
+    }
+    $res = apply_filters( 'huayi_wpapi_media_filters',$data );//改变最终返回结果
+  } else {
+    $res = '404';
+  }
   return $res;
 }
 
